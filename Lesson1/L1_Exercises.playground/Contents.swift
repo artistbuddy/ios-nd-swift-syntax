@@ -12,26 +12,40 @@ let index2 = Int(arc4random() % 9)
 let sentence = "The \(nounArray[6]) spilled her \(nounArray[7])."
 let  sillySentence = "The \(nounArray[index1]) jumped over the \(nounArray[index2])."
 //: Now try it yourself! Declare a new string that incorporates objects from the noun array above. Write one sentence that makes sense and one "Madlib" sentence with randomly chosen words. Feel free to add words to the noun array or declare a new array.
-let yourSentence = "TODO: Incorporate objects from the noun array here."
-let yourSillySentence = "TODO: Incorporate randomly chosen objects from the noun array here."
+let yourSentence = "On \(nounArray[1]) you can run \(nounArray[3])"
+let yourSillySentence = "\(nounArray[0]) and \(nounArray[6]) like \(nounArray.last!)"
 //: ### Exercise 2
 //: Recreate the shoutString by using the didYouKnowString as a stem.
 let didYouKnowString = "Did you know that the Swift String class comes with lots of useful methods?"
 let whisperString = "psst" + ", " + didYouKnowString.lowercased()
 let shoutString =  "HEY! DID YOU KNOW THAT THE SWIFT STRING CLASS COMES WITH LOTS OF USEFUL METHODS?"
 //: ### Exercise 3
-//: How many characters are in this string? 
+//: How many characters are in this string?
 let howManyCharacters = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?"
+print(howManyCharacters.characters.count)
 //: ### Exercise 4
 //: How many times does the letter "g" or "G" appear in the following string? Use a for-in loop to find out!
 let gString = "Gary's giraffe gobbled gooseberries greedily"
 var count = 0
+
+for char in gString.characters where char == "g" || char == "G" {
+    count += 1
+}
+
+print(count)
 //: ### Exercise 5
 //: Write a program that tells you whether or not this string contains the substring "tuna".
 let word = "fortunate"
+if word.contains("tuna") {
+    print("yes")
+} else {
+    print("no")
+}
 //: ### Exercise 6
 //: Write a program that deletes all occurrences of the word "like" in the following string.
 let lottaLikes = "If like, you wanna learn Swift, like, you should build lots of small apps, cuz it's like, a good way to practice."
+
+lottaLikes.replacingOccurrences(of: "like", with: "")
 //: ### Exercise 7
 // Example
 let sillyMonkeyString = "A monkey stole my iPhone"
@@ -41,11 +55,22 @@ let newerString = newString.replacingOccurrences(of: "iPhone", with: "📱")
 //: You can start off with this dictionary and string.
 let dictionary = ["monkey": "🐒", "iPhone":"📱"]
 var newestString = sillyMonkeyString
+
+for item in dictionary {
+    newestString = newestString.replacingOccurrences(of: item.key, with: item.value)
+}
+
+print(newestString)
 //: ### Exercise 8
 //: Josie has been saving her pennies and has them all counted up. Write a program that, given a number of pennies, prints out how much money Josie has in dollars and cents.
 // Example
 let numOfPennies = 567
 //desired output = "$5.67"
+
+let dollars = numOfPennies / 100
+let cents = numOfPennies - dollars * 100
+
+print("$\(dollars).\(cents)")
 //: # Let or Var?
 import UIKit
 import Foundation
@@ -69,16 +94,22 @@ import Foundation
 let summitElevation: Int
 var currentElevation: Int
 //: 10a) Imagine you are writing a quiz app, and you need to program a timer that will stop a quiz after 20 min. Declare four entities: startTime, currentTime, maximumTimeAllowed, and timeRemaining. Don't worry about encoding their values.
+let startTime: Int
+var currentTime: Int
+let maximumTimeAllowed: Int
+var timeRemaining: Int
 
 //: 10b) Imagine you are writing an app for a credit card company. Declare two entities: creditLimit and balance.
+let creditLimit: Int
+var balance: Int
 //: ### Exercise 11
 //: Below is the code to reverse a string. Have a look at the entities declared: stringToReverse and reversedString. Choose whether to declare each with let or var. When you're finished uncomment the code and see if the compiler agrees with your choices!
-//let or var stringToReverse = "Mutable or Immutable? That is the question." //TODO:Choose let or var
-//let or var reversedString = "" //TODO:Choose let or var
-//for character in stringToReverse.characters {
-//    reversedString = "\(character)" + reversedString
-//}
-//print(reversedString, terminator: "")
+let stringToReverse = "Mutable or Immutable? That is the question." //TODO:Choose let or var
+var reversedString = "" //TODO:Choose let or var
+for character in stringToReverse.characters {
+    reversedString = "\(character)" + reversedString
+}
+print(reversedString, terminator: "")
 
 
 
