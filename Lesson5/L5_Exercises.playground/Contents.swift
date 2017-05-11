@@ -8,12 +8,25 @@ import UIKit
 
 //:Test out your discovery below by returning the last letter of the String, "bologna".
 var word = "bologna"
+//word.remove(at: word.endIndex)
+word[word.index(before: word.endIndex)]
 
 //: __Problem 2__
 //:
 //: Write a function called combineLastCharacters. It should take in an array of strings, collect the last character of each string and combine those characters to make a new string to return. Use the strategy you discovered in Problem 1 along with a for-in loop to write combineLastCharacters. Then try it on the nonsenseArray below.
 var nonsenseArray = ["bungalow", "buffalo", "indigo", "although", "Ontario", "albino", "%$&#!"]
 
+func combineLastCharacters(array: [String]) -> String {
+    var output = ""
+    
+    for string in array {
+        output +=  String(string[string.index(before: string.endIndex)])
+    }
+    
+    return output
+}
+
+combineLastCharacters(array: nonsenseArray)
 //: __Problem 3__
 //:
 //: Imagine you are writing an app that keeps track of what you spend during the week. Prices of items purchased are entered into a "price" textfield. The "price" field should only allow numbers, no letters.
@@ -26,18 +39,59 @@ var nonsenseArray = ["bungalow", "buffalo", "indigo", "although", "Ontario", "al
 
 let digits = CharacterSet.decimalDigits
 
+func isValidPrice(_ price: String) -> Bool {
+    for digit in price.unicodeScalars {
+        if !digits.contains(digit) {
+            return false
+        }
+    }
+    
+    return true
+}
+
+isValidPrice("123.0")
+
+//or better
+
+func isDigit(_ string: String) -> Bool {
+    guard Int(string) != nil else {
+        return false
+    }
+    
+    return true
+}
+
+isDigit("123.0")
+
 //: __Problem 4__
 //:
 //: Write a function that takes in an array of dirtyWord strings, removes all of the four-letter words, and returns a clean array.
 let dirtyWordsArray = ["phooey", "darn", "drat", "blurgh", "jupiters", "argh", "fudge"]
 
+func removeFourLetterWords(_ words: [String]) -> [String] {
+    return words.filter{ $0.characters.count != 4 }
+}
+
+removeFourLetterWords(dirtyWordsArray)
+
 //: __Problem 5__
 //:
 //: Write a method, filterByDirector, that belongs to the MovieArchive class.  This method should take in a dictionary of movie titles and a string representing the name of a director and return an array of movies created by that director. You can use the movie dictionary below. To test your method, instantiate an instance of the MovieArchive class and call filterByDirector from that instance.
 
-var movies:Dictionary<String,String> = [ "Boyhood":"Richard Linklater","Inception":"Christopher Nolan", "The Hurt Locker":"Kathryn Bigelow", "Selma":"Ava Du Vernay", "Interstellar":"Christopher Nolan"]
+var movies:Dictionary<String,String> = ["Boyhood":"Richard Linklater","Inception":"Christopher Nolan", "The Hurt Locker":"Kathryn Bigelow", "Selma":"Ava Du Vernay", "Interstellar":"Christopher Nolan"]
 
 class MovieArchive {
-
+    var movies: [String:String]!
+    
+    init(_ movies: [String:String]) {
+        self.movies = movies
+    }
+    
+    func filterByDirector(_ director: String) -> [String] {
+        return movies.filter{ $1 == director }.map{ $0.key }
+    }
 }
+
+let ma = MovieArchive(movies)
+ma.filterByDirector("Christopher Nolan")
 
